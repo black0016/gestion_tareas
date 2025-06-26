@@ -154,3 +154,118 @@ const confirmarTareaCreada = (response) => {
         });
     }
 }
+
+let dt_tareas = $('#dt_tareas').DataTable({
+    "language": {
+        "lengthMenu": "Mostrar _MENU_ registros por página",
+        "zeroRecords": "No se encontraron registros",
+        // "info": "Mostrando página _PAGE_ de _PAGES_",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+        "infoEmpty": "No Hay registros disponibles",
+        "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+        "search": "Buscar:",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "paginate": {
+            "first": "Primero",
+            "last": "Último",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        },
+        searchBuilder: {
+            add: 'Añadir condición',
+            condition: 'Condición',
+            conditions: {
+                "date": {
+                    "after": "Despues",
+                    "before": "Antes",
+                    "between": "Entre",
+                    "empty": "Vacío",
+                    "equals": "Igual a",
+                    "notBetween": "No entre",
+                    "notEmpty": "No Vacio",
+                    "not": "Diferente de"
+                },
+                "number": {
+                    "between": "Entre",
+                    "empty": "Vacio",
+                    "equals": "Igual a",
+                    "gt": "Mayor a",
+                    "gte": "Mayor o igual a",
+                    "lt": "Menor que",
+                    "lte": "Menor o igual que",
+                    "notBetween": "No entre",
+                    "notEmpty": "No vacío",
+                    "not": "Diferente de"
+                },
+                "string": {
+                    "contains": "Contiene",
+                    "empty": "Vacío",
+                    "endsWith": "Termina en",
+                    "equals": "Igual a",
+                    "notEmpty": "No Vacio",
+                    "startsWith": "Empieza con",
+                    "not": "Diferente de",
+                    "notContains": "No Contiene",
+                    "notStarts": "No empieza con",
+                    "notEnds": "No termina con"
+                },
+                "array": {
+                    "not": "Diferente de",
+                    "equals": "Igual",
+                    "empty": "Vacío",
+                    "contains": "Contiene",
+                    "notEmpty": "No Vacío",
+                    "without": "Sin"
+                }
+            },
+            clearAll: 'Borrar todo',
+            delete: 'Eliminar',
+            deleteTitle: 'Eliminar regla de filtrado',
+            data: 'Data',
+            // left: 'Izquierda',
+            leftTitle: 'Criterios anulados',
+            logicAnd: 'Y',
+            logicOr: 'O',
+            // right: 'Derecha',
+            rightTitle: 'Criterios de sangría',
+            title: {
+                0: 'Constructor de búsqueda',
+                _: 'Constructor de búsqueda (%d)'
+            },
+            value: 'Valor',
+            valueJoiner: 'et'
+        }
+    },
+    "deferRender": true,
+    dom: 'Qfrtip',
+    select: {
+        style: 'multi'
+    },
+    "ajax": {
+        "url": "listarTareas",
+        data: {},
+        beforeSend: function (xhr) {
+            $('.preload').removeClass('hidden');
+        },
+        complete: function (xhr) {
+            $('.preload').addClass('hidden');
+        },
+        dataType: "json",
+        "type": "POST"
+    },
+    columns: [
+        { data: 'idTarea' },
+        { data: 'tituloTarea' },
+        { data: 'descripcionTarea' },
+        { data: 'fechaVencimientoTarea' },
+        { data: 'prioridadTarea' },
+        { data: 'tareaCompleta' },
+        { data: 'created_at' },
+        { data: 'updated_at' },
+        { data: 'acciones' },
+    ],
+    "scrollX": true,
+    "order": [[3, "asc"]],
+    "displayLength": 10
+});

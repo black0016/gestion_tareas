@@ -9,4 +9,5 @@ define('ROUTES', [
 
     'tareas'                                                         => ['controller' => 'Tarea', 'action' => 'index', 'perfil' => [2]],
     'crearTarea'                                                     => ['controller' => 'Tarea', 'action' => 'crearTarea', 'perfil' => [2]],
+    'listarTareas'                                                   => ['controller' => 'Tarea', 'action' => 'listarTareas', 'perfil' => [2]],
 ]);
