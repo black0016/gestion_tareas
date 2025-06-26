@@ -56,8 +56,8 @@
 							<button type="submit" class="btn theme-button">Ingresar</button>
 						</div>
 						<div class="new-signup">
-							<a href="<?= PUBLIC_PATH ?>/recuperarPass" class="signuplink">Recuperar contraseña</a>
-							<a href="<?= PUBLIC_PATH ?>/registrar" class="signuplink register-link">Registrarse</a>
+							<a class="signuplink" style="cursor: pointer;" id="recuperarPassword">Recuperar contraseña</a>
+							<a class="signuplink register-link" style="cursor: pointer;" id="registrarUsuario">Registrarse</a>
 						</div>
 					</form>
 				</div>
@@ -82,7 +82,7 @@
 
 	<script src="<?= PUBLIC_PATH ?>/js/script.js"></script>
 	<script src="<?= PUBLIC_PATH ?>/js/helpers.js"></script>
-	<!-- <script src="<?= PUBLIC_PATH ?>/js/login.js"></script> -->
+	<script src="<?= PUBLIC_PATH ?>/js/login.js"></script>
 </body>
 
 </html>

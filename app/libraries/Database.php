@@ -1,99 +1,93 @@
 <?php
-class Database {
+class Database
+{
 
     public $isConn;
     protected $datab;
 
-    public function __construct
-        (
-            $username = 'siros', $password = '%S3rv1c3sS4s%', $host = '10.10.12.221', $dbname = 'siros', 
-            $options = [PDO::MYSQL_ATTR_FOUND_ROWS => true]
-        ) 
-    {
+    public function __construct(
+        $username = 'root',
+        $password = '',
+        $host = 'localhost',
+        $dbname = 'gestion_tareas',
+        $options = [PDO::MYSQL_ATTR_FOUND_ROWS => true]
+    ) {
         try {
 
             $this->datab = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8mb4", $username, $password, $options);
             $this->datab->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->isConn = true;
-
         } catch (PDOException $e) {
 
             throw new Exception($e->getMessage());
-            
         }
     }
 
-    public function setFetchWithAssoc() {
+    public function setFetchWithAssoc()
+    {
 
         try {
 
             $this->datab->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            
         } catch (PDOException $e) {
 
-            throw new Exception($e->getMessage());  
-
+            throw new Exception($e->getMessage());
         }
     }
 
-    public function setFetchWithNum() {
+    public function setFetchWithNum()
+    {
 
         try {
 
             $this->datab->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_NUM);
-
         } catch (PDOException $e) {
 
             throw new Exception($e->getMessage());
-
         }
-    } 
-    
-    public function setFetchWithBoth() {
+    }
+
+    public function setFetchWithBoth()
+    {
 
         try {
             $this->datab->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_BOTH);
-
         } catch (PDOException $e) {
 
             throw new Exception($e->getMessage());
-
         }
-
     }
 
-    public function getRow($query, $params = []) {
-        
+    public function getRow($query, $params = [])
+    {
+
         try {
 
             $stmt = $this->datab->prepare($query);
             $stmt->execute($params);
             return $stmt->fetch();
-            
         } catch (PDOException $e) {
 
             throw new Exception($e->getMessage());
-            
         }
-
     }
 
-    public function getSeveralRows($query, $params = []) {
-        
+    public function getSeveralRows($query, $params = [])
+    {
+
         try {
 
             $stmt = $this->datab->prepare($query);
             $stmt->execute($params);
             return $stmt->fetchAll();
-            
         } catch (PDOException $e) {
 
             throw new Exception($e->getMessage());
-            
         }
     }
 
-    public function insertRow($query, $params = []) {
+    public function insertRow($query, $params = [])
+    {
 
         try {
 
@@ -101,78 +95,68 @@ class Database {
             $stmt->execute($params);
             $result = $stmt->rowCount();
             return $result;
-
         } catch (PDOException $e) {
 
             throw new Exception($e->getMessage());
-            
         }
-
     }
 
-    public function updateRow($query, $params = []) {
+    public function updateRow($query, $params = [])
+    {
 
         $result = $this->insertRow($query, $params);
         return $result;
-
     }
 
-    public function deleteRow($query, $params = []) {
+    public function deleteRow($query, $params = [])
+    {
 
         $result = $this->insertRow($query, $params);
         return $result;
-
     }
 
-    public function getLastInsertId() {
+    public function getLastInsertId()
+    {
 
         try {
 
             return $this->datab->lastInsertId();
-            
         } catch (PDOException $e) {
 
             throw new Exception($e->getMessage());
-            
         }
-
     }
 
-    public function beginTransaction() {
+    public function beginTransaction()
+    {
 
         try {
 
             $this->datab->beginTransaction();
-
         } catch (PDOException $e) {
 
             throw new Exception($e->getMessage());
-
         }
-        
     }
 
-    public function processTransaction() {
+    public function processTransaction()
+    {
 
         try {
 
             $result = $this->datab->commit();
             return $result;
-
         } catch (PDOException $e) {
 
             $this->datab->rollBack();
             throw new Exception($e->getMessage());
-
         }
-
     }
 
-    public function disconnect() {
+    public function disconnect()
+    {
 
         $this->datab = null;
         $this->isConn = false;
-
     }
-
 }
