@@ -9,10 +9,58 @@ class LoginController
 
     public function registrarUsuario()
     {
+        $userName = filter_input(INPUT_POST, 'userName', FILTER_SANITIZE_SPECIAL_CHARS);
+        $emailUsuario = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_EMAIL);
+        $passwordUsuario = filter_input(INPUT_POST, 'userPassword', FILTER_SANITIZE_SPECIAL_CHARS);
+        $confirmPassword = filter_input(INPUT_POST, 'confirmPassword', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        if (
+            empty($userName) ||
+            strlen($userName) < 5 ||
+            strlen($userName) > 50 ||
+            !preg_match('/^[a-zA-Z0-9_.\-@]+$/', $userName)
+        ) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'El nombre de usuario es inválido.'
+            ]);
+            return;
+        }
+
+        if (
+            empty($emailUsuario) ||
+            !filter_var($emailUsuario, FILTER_VALIDATE_EMAIL)
+        ) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'El correo electrónico no es válido.'
+            ]);
+            return;
+        }
+
+        if (
+            empty($passwordUsuario) ||
+            strlen($passwordUsuario) < 6
+        ) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'La contraseña debe tener al menos 6 caracteres.'
+            ]);
+            return;
+        }
+
+        if ($passwordUsuario !== $confirmPassword) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Las contraseñas no coinciden.'
+            ]);
+            return;
+        }
+
         $data = array(
-            'userName' => filter_input(INPUT_POST, 'userName', FILTER_SANITIZE_SPECIAL_CHARS),
-            'emailUsuario' => filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_EMAIL),
-            'passwordUsuario' => password_hash(filter_input(INPUT_POST, 'userPassword', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT),
+            'userName' => $userName,
+            'emailUsuario' => $emailUsuario,
+            'passwordUsuario' => password_hash($passwordUsuario, PASSWORD_DEFAULT),
             'estadoUsuario' => 'Activo',
             'idTipoUsuario' => 2
         );
@@ -97,5 +145,4 @@ class LoginController
         header('Location: ' . PUBLIC_PATH . '/');
         exit();
     }
-
 }

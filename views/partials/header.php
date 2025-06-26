@@ -2,9 +2,9 @@
     <!-- Logo -->
     <a href="<?= PUBLIC_PATH ?>/inicio" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>S</b>R</span>
+        <span class="logo-mini"><b>G</b>T</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>S I R O S</b> </span>
+        <span class="logo-lg"><b>Gestor Tareas</b> </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -15,8 +15,6 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-
-
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -54,7 +52,10 @@
         <ul class="sidebar-menu">
             <li class="header">MENU DE NAVEGACIÓN</li>
             <li> <a href="<?= PUBLIC_PATH ?>/inicio"> <i class="fa fa-dashboard"> </i> <span>Inicio</span> </a> </li>
-           
+            
+            <?php if ($_SESSION["user"]["idTipoUsuario"] == 2) : ?>
+                <li> <a href="<?= PUBLIC_PATH ?>/tareas"> <i class="fa fa-tasks"></i> <span>Tareas</span> </a> </li>
+            <?php endif; ?>
         </ul>
     </section>
 </aside>

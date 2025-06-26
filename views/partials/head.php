@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SIROS SYSTEM</title>
+    <title>Gestor de tareas </title>
 
     <!-- Icono de la pagina -->
-    <link rel="icon" type="image" href="<?= PUBLIC_PATH ?>/img/prueba2.png">
+    <link rel="icon" href="<?= PUBLIC_PATH ?>/img/icon.png">
     <!-- bootstrap -->
     <link rel="stylesheet" href="<?= PUBLIC_PATH ?>/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -53,7 +53,7 @@
 </head>
 <!-- <body class="hold-transition skin-red sidebar-mini"> -->
 
-<body class="hold-transition skin-black-light sidebar-mini">
+<body class="hold-transition skin-purple sidebar-mini">
 
     <?php
     if (!isset($_SESSION['user'])) {

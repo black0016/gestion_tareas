@@ -208,16 +208,7 @@ const validarFormularioInicioSesion = () => {
 
 const confirmarInicioSesion = (response) => {
     if (response.status === 'success') {
-        mostrarAlerta('fa fa-check',
-            'Éxito',
-            'Inicio de sesión exitoso.',
-            'green',
-            {
-                Inicio: function () {
-                    window.location.href = 'inicio';
-                }
-            }
-        );
+        window.location.href = 'inicio';
     } else {
         mostrarAlerta('fa fa-times',
             'Error',
