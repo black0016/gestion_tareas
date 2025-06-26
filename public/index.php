@@ -8,13 +8,13 @@ $route = ROUTES[$url] ?? false;
 
 // Solo exigir sesión si la ruta tiene perfiles definidos
 if ($route && !empty($route['perfil'])) {
-   if (!isset($_SESSION["usuario"]["idTipoUsuario"])) {
+   if (!isset($_SESSION["user"]["idTipoUsuario"])) {
       // Si no hay sesión, redirige al login
       header('Location:' . PUBLIC_PATH . '/');
       exit();
    }
    // Validación genérica para cualquier tipo de usuario
-   if (!in_array($_SESSION["usuario"]["idTipoUsuario"], $route["perfil"])) {
+   if (!in_array($_SESSION["user"]["idTipoUsuario"], $route["perfil"])) {
       header('HTTP/1.0 404 Not Found');
       die('Página no encontrada');
    }

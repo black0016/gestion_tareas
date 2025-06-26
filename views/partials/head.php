@@ -56,19 +56,9 @@
 <body class="hold-transition skin-black-light sidebar-mini">
 
     <?php
-    if (!isset($_SESSION['usuario'])) {
+    if (!isset($_SESSION['user'])) {
         header('Location:' . PUBLIC_PATH . '/');
     }
-
-    // Codigo que expira las sesiones despues de 30 minutos de inactividad
-    // if (!isset($_SESSION["time"])) {
-    //     $_SESSION["time"] = time();
-    // } else if (time() - $_SESSION["time"] > 1800) {
-    //     session_destroy();
-    //     header('Location:' . PUBLIC_PATH . '/');
-    //     die();
-    // }
-    // $_SESSION["time"] = time();
     ?>
 
     <div class="preload hidden">

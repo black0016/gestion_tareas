@@ -55,11 +55,6 @@
     <script src="<?= PUBLIC_PATH ?>/js/script.js"></script>
     <script src="<?= PUBLIC_PATH ?>/js/helpers.js"></script>
 
-    <?php if ($_SESSION["usuario"]["idTipoUsuario"] == 17 || $_SESSION["usuario"]["idTipoUsuario"] == 18) : ?>
-        <!-- Script de las notificaciones de servicios especiales -->
-        <script src="<?= HelperService::autoVersion('js/notificacionesServiciosEspeciales.js') ?>"></script>
-    <?php endif; ?>
-
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 

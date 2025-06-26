@@ -52,12 +52,8 @@ class LoginController
             }
             // Verificar la contraseña
             if (password_verify($userPassword, $userBd['passwordUsuario'])) {
-
-                // Actualizar el último login del usuario
                 $loginModel->actualizarUltimoLogin($userBd['idUsuario']);
-                // Eliminar la contraseña del array para no exponerla
                 unset($userBd['passwordUsuario']);
-                // Iniciar sesión y guardar los datos del usuario en la sesión
                 $_SESSION['user'] = $userBd;
 
                 echo json_encode([
@@ -75,6 +71,19 @@ class LoginController
                 'status' => 'error',
                 'message' => 'El usuario ingresado no se encuentra registrado en el sistema. Por favor, verifique el nombre de usuario o regístrese.'
             ]);
+        }
+    }
+
+    public function inicio()
+    {
+        if (isset($_SESSION['user']) && $_SESSION['user']['idTipoUsuario'] == 1) {
+            View::render('inicioAdministrador');
+            return;
+        }
+
+        if (isset($_SESSION['user']) && $_SESSION['user']['idTipoUsuario'] == 2) {
+            View::render('inicioUsuario');
+            return;
         }
     }
 }
