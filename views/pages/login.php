@@ -36,14 +36,14 @@
 						<div class="form-group">
 							<div class="form-input input-group">
 								<span class="fa fa-user" aria-hidden="true"></span>
-								<input class="form-control" type="text" name="usuario" id="usuario" placeholder="Usuario" autocomplete="off">
+								<input class="form-control" type="text" name="userNameLogin" id="userNameLogin" placeholder="Usuario" autocomplete="off">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="form-input input-group">
 								<span class="fa fa-key" aria-hidden="true"></span>
-								<input class="form-control" type="password" name="pass" id="pass" placeholder="Contraseña" autocomplete="off">
+								<input class="form-control" type="password" name="userPasswordLogin" id="userPasswordLogin" placeholder="Contraseña" autocomplete="off">
 							</div>
 						</div>
 

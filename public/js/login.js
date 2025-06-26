@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function () {
+    validarFormularioInicioSesion();
+});
+
 const mostrarAlerta = (icon, title, content, type, buttons) => {
     $.confirm({
         icon: icon,
@@ -14,7 +18,7 @@ document.getElementById('registrarUsuario').addEventListener('click', function (
 });
 
 const formularioRegistrarUsuario = () => {
-    let ventanaModal = $.confirm({
+    $.confirm({
         title: "Creación de Usuario",
         type: 'blue',
         onContentReady: function () {
@@ -149,7 +153,7 @@ const confirmarUsuarioRegistrado = (response) => {
             'Usuario registrado correctamente.',
             'green',
             {
-                OK: function () {
+                Cerrar: function () {
                     location.reload();
                 }
             }
@@ -160,7 +164,58 @@ const confirmarUsuarioRegistrado = (response) => {
             response.message,
             'red',
             {
-                OK: function () { }
+                Cerrar: function () { }
+            }
+        );
+    }
+};
+
+const validarFormularioInicioSesion = () => {
+    $('#frmLogin')
+        .bootstrapValidator({
+            excluded: ':disabled',
+            message: 'Este Valor no es Valido',
+            feedbackIcons: {
+                valid: 'fa fa-check',
+                invalid: 'fa fa-times',
+                validating: 'fa fa-refresh'
+            },
+            fields: {
+                userNameLogin: {
+                    validators: {
+                        notEmpty: {
+                            message: 'El nombre de usuario es requerido'
+                        }
+                    }
+                },
+                userPasswordLogin: {
+                    validators: {
+                        notEmpty: {
+                            message: 'La contraseña es requerida'
+                        }
+                    }
+                }
+            }
+        })
+        .on('success.form.bv', function (e) {
+            e.preventDefault();
+            const $form = $(e.target);
+            const bv = $form.data('bootstrapValidator');
+            ajax('login', 'POST', $form.serialize(), 'json', confirmarInicioSesion);
+            bv.disableSubmitButtons(false);
+        });
+};
+
+const confirmarInicioSesion = (response) => {
+    if (response.status === 'success') {
+        window.location.href = 'inicio';
+    } else {
+        mostrarAlerta('fa fa-times',
+            'Error',
+            response.message,
+            'red',
+            {
+                Cerrar: function () { }
             }
         );
     }
