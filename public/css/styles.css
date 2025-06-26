@@ -1,0 +1,863 @@
+.preload {
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    /* z-index: 1031; */
+    z-index: 100000009;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* login */
+.login-fondo {
+    background-image: url(../img/logo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    /* align-items: center; */
+}
+
+@media (max-width: 767px) {
+    .login-fondo .container {
+        width: 100%;
+    }
+}
+
+.login-container {
+    margin-top: 50px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    padding: 20px 0;
+}
+
+.login-head {
+    border: none;
+    color: white !important;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.login-head .panel-title {
+    font-size: 4rem;
+    /* font-family: Georgia, 'Times New Roman', Times, serif; */
+    /* font-family: 'Lobster', cursive; */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login-head h5 {
+    font-size: 1.5rem !important;
+}
+
+.login-footer {
+    border: none;
+    color: white !important;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0) !important;
+    /* font-family: 'Lobster', cursive; */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+}
+
+.login-recuperar {
+    color: white;
+}
+
+.login-recuperar:hover {
+    color: currentColor;
+}
+
+.login-container .input-group-addon {
+    font-size: 24px;
+    border: none;
+    background-color: transparent;
+    /* color: #02D4B7; */
+    color: #FE265B;
+}
+
+.login-container .icono-usuario {
+    padding-right: 8px;
+}
+
+.login-container input {
+    font-size: 18px;
+    height: 38px;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    /* font-family: 'Lobster', cursive; */
+    /* border-top-left-radius: 7px !important;
+    border-bottom-left-radius: 7px !important;
+    border-top-right-radius: 7px !important;
+    border-bottom-right-radius: 7px !important; */
+}
+
+.login-container .tamano {
+    font-size: 13px !important;
+}
+
+.login-container .btn {
+    font-size: 2rem;
+    height: 40px;
+    /* background-color: #02D4B7; */
+    background-color: #FE265B;
+    font-weight: bold;
+    border: none;
+    /* font-family: 'Lobster', cursive; */
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+/* fin login */
+
+/* Recuperar password */
+.info-recuperar {
+    border: none;
+    color: white !important;
+    text-align: center;
+}
+
+/* Fin Recuperar password */
+
+/* datatable */
+/* .dataTables_scrollHeadInner,
+.table.table-striped.table-bordered.dataTable.no-footer,
+.table.table-striped.table-bordered.nowrap.dataTable.no-footer {
+    width: 100% !important;
+} */
+/* fin datatable */
+
+/* contenedor de la imagen de perfil */
+.imagen-container {
+    position: relative;
+}
+
+/* estilos imagen de perfil */
+.img-perfil {
+    border-radius: 5% !important;
+    border: gray 1.5px solid;
+}
+
+/* aparece encima de la imagen de perfil cuando se hace hover */
+.overlay {
+    border-radius: 5%;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background-color: black;
+    opacity: .8;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style imagen perfil en auditores*/
+
+.foto-perfil {
+    max-width: 50px;
+    border-radius: 10%;
+}
+
+.imagen-container:hover .overlay {
+    bottom: 0;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* texto del overlay para cambiar la foto de perfil */
+.texto-overlay {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    overflow: hidden;
+    text-align: center;
+}
+
+.link-perfil {
+    cursor: pointer;
+}
+
+/* oculta el input de tipo file para subir la imagen al servidor */
+#uploadfile1 {
+    display: none;
+}
+
+.btn-cargarImg {
+    display: none !important;
+}
+
+
+/* EStilos del boton de chat */
+
+.show-btn {
+    position: absolute;
+    left: 73%;
+    top: 83%;
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+    border-radius: 50%;
+    text-align: center;
+    background: tomato;
+    color: #fff;
+    z-index: 100;
+}
+
+.show-btn i {
+    margin: 15px 17px;
+    font-size: 60px;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+#show:checked~.ocultarInicio {
+    display: none !important;
+}
+
+/*=========================================
+    CODIGO DE LA VENTA QUE CONTIENE EL CHAT
+=========================================*/
+#show {
+    display: none;
+}
+
+.container-modal {
+    box-sizing: border-box;
+    text-decoration: none;
+    width: 400px;
+    /* height: 90%; */
+    position: absolute;
+    top: 15%;
+    left: 70%;
+    /* background-color: red; */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#btn-modal:checked~.container-modal {
+    display: flex;
+}
+
+.content-modal {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 98%;
+    max-width: 400px;
+    /* padding: 20px; */
+    /* background-color: #eee; */
+    background-color: #fff;
+    /* background-color: red; */
+    border-radius: 16px;
+    box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+        0 32px 64px -48px rgba(0, 0, 0, 0.5);
+}
+
+.content-modal .btn-cerrar {
+    width: 100%;
+    /* margin-right: 50px; */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content-modal .btn-cerrar label {
+    padding: 0 5px;
+    /* background-color: #5488a3; */
+    color: #000;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    margin-bottom: 0 !important;
+}
+
+.content-modal .btn-cerrar label:hover {
+    background-color: #185E83;
+}
+
+.cerrar-modal {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* @media screen and (max-width:800px) {
+    .content-modal{
+        width: 90%;
+    }
+} */
+
+/*=========================================
+    CODIGO DEL CHAT LISTA DE USUARIOS
+=========================================*/
+/* Users List CSS Start */
+.usuarios {
+    padding: 25px 30px;
+}
+
+.usuarios header,
+.usuarios-list .claseA {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e6e6e6;
+    justify-content: space-between;
+}
+
+.container-modal img {
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.usuarios header img {
+    height: 50px;
+    width: 50px;
+}
+
+:is(.usuarios, .usuarios-list) .contenido {
+    display: flex;
+    align-items: center;
+}
+
+:is(.usuarios, .usuarios-list) .contenido .detalles {
+    color: #000;
+    margin-left: 20px;
+}
+
+:is(.usuarios, .usuarios-list) .detalles span {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.usuarios .buscador {
+    margin: 20px 0;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.usuarios .buscador .text {
+    font-size: 18px;
+}
+
+.usuarios .buscador input {
+    position: absolute;
+    height: 42px;
+    width: calc(100% - 50px);
+    font-size: 16px;
+    padding: 0 13px;
+    border: 1px solid #e6e6e6;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+
+.usuarios .buscador input.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.usuarios .buscador button {
+    position: relative;
+    z-index: 1;
+    width: 47px;
+    height: 42px;
+    font-size: 17px;
+    cursor: pointer;
+    border: none;
+    background: #fff;
+    color: #2196f3;
+    outline: none;
+    border-radius: 0 5px 5px 0;
+    transition: all 0.2s ease;
+}
+
+.usuarios .buscador button.active {
+    background: #2196f3;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.buscador button.active i::before {
+    content: '\f00d';
+}
+
+.usuarios-list {
+    max-height: 340px;
+    overflow-y: auto;
+}
+
+.usuarios-list::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.usuarios-list::-webkit-scrollbar:vertical {
+    width: 10px;
+}
+
+.usuarios-list::-webkit-scrollbar-button:increment,
+.contenedor::-webkit-scrollbar-button {
+    display: none;
+}
+
+.usuarios-list::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.usuarios-list::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.usuarios-list::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* :is(.usuarios-list, .chat-box)::-webkit-scrollbar{
+    width: 0px;
+} */
+
+.usuarios-list .claseA {
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    padding-right: 15px;
+    border-bottom-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.usuarios-list .claseA:last-child {
+    margin-bottom: 0px;
+    border-bottom: none;
+}
+
+.usuarios-list .claseA img {
+    height: 40px;
+    width: 40px;
+}
+
+.usuarios-list .claseA .detalles p {
+    color: #67676a;
+}
+
+.usuarios-list .claseA .status-dot {
+    font-size: 12px;
+    color: #468669;
+    padding-left: 10px;
+}
+
+.usuarios-list .claseA .status-dot.offline {
+    color: #ccc;
+}
+
+/*=========================================
+    CODIGO DEL CHAT VISTA PARA CHATEAR
+=========================================*/
+
+.chat-area header {
+    display: flex;
+    align-items: center;
+    padding: 18px 30px;
+}
+
+.chat-area header .back-icon {
+    color: #2196f3;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.chat-area header img {
+    height: 45px;
+    width: 45px;
+    margin: 0 15px;
+}
+
+.chat-area header .detalles span {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.chat-caja {
+    position: relative;
+    min-height: 390px;
+    max-height: 390px;
+    overflow-y: auto;
+    padding: 10px 30px 20px 30px;
+    background: #f7f7f7;
+    box-shadow: inset 0 32px 32px -32px rgb(0, 0, 0 / 5%),
+        inset 0 -32 32px -32px rgb(0, 0, 0 / 5%);
+}
+
+.chat-caja::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.chat-caja::-webkit-scrollbar:vertical {
+    width: 10px;
+}
+
+.chat-caja::-webkit-scrollbar-button:increment,
+.contenedor::-webkit-scrollbar-button {
+    display: none;
+}
+
+.chat-caja::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.chat-caja::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.chat-caja::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.chat-caja .text {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: calc(100% - 50px);
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.chat-caja .chat {
+    margin: -5px 0;
+}
+
+.chat-caja .chat p {
+    word-wrap: break-word;
+    padding: 8px 16px;
+    box-shadow: 0 0 32px rgb(0, 0, 0 / 8%),
+        0rem 16px 16px -16px rgb(0, 0, 0 / 10%);
+}
+
+.chat-caja .outgoing {
+    display: flex;
+}
+
+.chat-caja .outgoing .detalles {
+    margin-left: auto;
+    max-width: calc(100% - 50px);
+}
+
+.outgoing .detalles p {
+    background: #2196f3;
+    color: #fff;
+    border-radius: 18px 18px 0 18px;
+}
+
+.chat-caja .incoming {
+    display: flex;
+    align-items: flex-end;
+}
+
+.chat-caja .incoming .img-logo {
+    height: 35px;
+    width: 35px;
+}
+
+.chat-caja .incoming .detalles {
+    margin-right: auto;
+    margin-left: 10px;
+    /* max-width: calc(100% - 130px); */
+}
+
+.incoming .detalles p {
+    background: #eeeeef;
+    color: #333;
+    border-radius: 18px 18px 18px 0;
+}
+
+.typing-area {
+    padding: 18px 30px;
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+.typing-area input {
+    height: 45px;
+    width: calc(100% - 58px);
+    font-size: 16px;
+    padding: 0 13px;
+    border: 1px solid #e6e6e6;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+}
+
+.typing-area button {
+    color: #fff;
+    width: 45px;
+    border: none;
+    outline: none;
+    background: #2196f3;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    font-size: 19px;
+    cursor: pointer;
+    opacity: 0.7;
+    pointer-events: none;
+    border-radius: 0 5px 5px 0;
+    transition: all 0.3s ease;
+}
+
+.typing-area button.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Boton de la camara */
+.input--file {
+    position: relative;
+    color: white !important;
+    /* color: #7f7f7f; */
+    width: 35px;
+    padding-top: 8px;
+    background: #2196f3;
+    opacity: 0.8;
+    /* color: #fff; */
+}
+
+.input--file input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+
+/*====================================================
+ESCRITORIO GRANDE (LG revisamos en 1366px en adelante)
+====================================================*/
+
+@media (min-width:1200px) {
+    .show-btn {
+        top: 85%;
+        left: 90%;
+    }
+}
+
+
+/*=============================================================
+ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
+=============================================================*/
+
+@media (max-width:1199px) and (min-width:992px) {
+    .show-btn {
+        top: 85%;
+        left: 88%;
+    }
+
+    .container-modal {
+        left: 60% !important;
+        top: 20%;
+    }
+}
+
+
+/*==========================================================
+ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768PX)
+==========================================================*/
+
+@media (max-width:991px)and (min-width:900px) {
+    .container-modal {
+        left: 58% !important;
+        top: 50%;
+    }
+}
+
+@media (max-width:899px) and (min-width:768px) {
+    .show-btn {
+        top: 85%;
+        left: 85%;
+    }
+
+    .container-modal {
+        left: 48% !important;
+    }
+}
+
+
+/*=====================================
+    MOVIL (XS revisamos en 320px)
+======================================*/
+
+@media (max-width:767px) {
+    .show-btn {
+        width: 70px;
+        height: 70px;
+        left: 75%;
+        top: 87%;
+    }
+
+    .show-btn i {
+        margin: 10px 12px;
+        font-size: 40px;
+    }
+
+    .container-modal {
+        width: 420px !important;
+        top: 22% !important;
+        left: 0% !important;
+    }
+}
+
+.form-section {
+    border: 5px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.form-section h4 {
+    margin-top: 0;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+
+.table-title {
+    font-size: 16px;
+    /* Tamaño de fuente */
+    color: #333;
+    /* Color del texto */
+    margin-bottom: 20px;
+    /* Margen inferior para separar el título de la tabla */
+    text-align: center;
+    /* Alineación del texto al centro */
+}
+
+/* Estilos personalizados para el paginador en dispositivos móviles */
+@media (max-width: 767px) {
+    .dataTables_wrapper .dataTables_paginate {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 5px 0;
+        font-size: 14px;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .pagination {
+        margin: 0;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background-color: #007bff;
+        color: #fff;
+        border: 1px solid #007bff;
+    }
+}
+
+.centrar-contenido {
+    text-align: center;
+}
+
+/* Centrar títulos de DataTables */
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate,
+.dataTables_wrapper .dataTables_processing,
+.dataTables_wrapper .dataTables_scroll {
+    text-align: center;
+}
+
+.dataTables_wrapper .dataTables_scrollHeadInner table {
+    text-align: center !important;
+}
+
+.dataTables_wrapper .dataTables_scrollHeadInner th {
+    text-align: center !important;
+}
+
+
+/* ESTILOS DE LA TABLA DE TAREAS DE LAS RONDAS MOVILES DE SEGURIDAD (SUPERVISORES) */
+.task-container {
+    max-width: 340px;
+    margin: 5px auto;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-title {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.task-description {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.task-status {
+    font-size: 1.5em;
+}
+
+.completed {
+    color: green;
+}
+
+.not-completed {
+    color: red;
+}
+
+.geo-status-alert {
+    position: fixed;
+    bottom: 20px;
+    left: 10px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 250px;
+    border-left: 4px solid #dc3545;
+    /* Color por defecto (fuera de rango) */
+}
+
+.geo-status-alert[data-status="en-rango"] {
+    border-left-color: #28a745;
+    /* Verde cuando está en rango */
+}
