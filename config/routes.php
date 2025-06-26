@@ -5,5 +5,8 @@ define('ROUTES', [
     'registrarUsuario'                                               => ['controller' => 'Login', 'action' => 'registrarUsuario', 'perfil' => []],
     'login'                                                          => ['controller' => 'Login', 'action' => 'login', 'perfil' => []],
     'inicio'                                                         => ['controller' => 'Login', 'action' => 'inicio', 'perfil' => [1, 2]],
-    'cerrarSesion'                                                  => ['controller' => 'Login', 'action' => 'cerrarSesion', 'perfil' => [1, 2]],
+    'cerrarSesion'                                                   => ['controller' => 'Login', 'action' => 'cerrarSesion', 'perfil' => [1, 2]],
+
+    'tareas'                                                         => ['controller' => 'Tarea', 'action' => 'index', 'perfil' => [2]],
+    'crearTarea'                                                     => ['controller' => 'Tarea', 'action' => 'crearTarea', 'perfil' => [2]],
 ]);
