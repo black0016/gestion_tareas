@@ -13,8 +13,10 @@ document.getElementById('btnAddTarea').addEventListener('click', e => {
     formularioCrearTarea();
 });
 
+let modalCrearTarea = null;
+
 const formularioCrearTarea = () => {
-    $.confirm({
+    modalCrearTarea = $.confirm({
         title: "Nueva Tarea",
         type: 'blue',
         onContentReady: function () {
@@ -145,7 +147,8 @@ const confirmarTareaCreada = (response) => {
     if (response.status === 'success') {
         mostrarAlerta('fa fa-check', 'Éxito', 'Tarea creada correctamente.', 'green', {
             Cerrar: function () {
-                location.reload();
+                dt_tareas.ajax.reload();
+                modalCrearTarea.close();
             }
         });
     } else {
@@ -269,3 +272,38 @@ let dt_tareas = $('#dt_tareas').DataTable({
     "order": [[3, "asc"]],
     "displayLength": 10
 });
+
+const terminarTarea = (idTarea) => {
+    $.confirm({
+        title: 'Confirmar',
+        content: '¿Estás seguro de que deseas marcar esta tarea como completada?, esta acción no se puede deshacer.',
+        type: 'green',
+        buttons: {
+            confirm: {
+                text: 'Sí, completar',
+                btnClass: 'btn-green',
+                action: function () {
+                    ajax('terminarTarea', 'POST', { idTarea: idTarea }, 'json', function (response) {
+                        if (response.status === 'success') {
+                            mostrarAlerta('fa fa-check', 'Éxito', 'Tarea completada correctamente.', 'green', {
+                                Cerrar: function () {
+                                    dt_tareas.ajax.reload();
+                                }
+                            });
+                        } else {
+                            mostrarAlerta('fa fa-times', 'Error', response.message, 'red', {
+                                Cerrar: function () { }
+                            });
+                        }
+                    });
+                }
+            },
+            cancel: {
+                text: 'Cancelar',
+                btnClass: 'btn-red',
+                action: function () {
+                }
+            }
+        }
+    });
+};

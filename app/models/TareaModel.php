@@ -47,4 +47,20 @@ class TareaModel
         $db->disconnect();
         return $result;
     }
+
+    public function terminarTarea($idTarea)
+    {
+        $db = new Database();
+        $sql = "UPDATE tarea 
+                SET tareaCompleta = ?, 
+                    updated_at = ?
+                WHERE idTarea = ?";
+        $result = $db->updateRow($sql, [
+            1, // Tarea completada
+            date('Y-m-d H:i:s'), // Fecha de actualización
+            $idTarea // ID de la tarea a actualizar
+        ]);
+        $db->disconnect();
+        return $result;
+    }
 }
