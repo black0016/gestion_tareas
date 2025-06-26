@@ -10,9 +10,6 @@ define('PUBLIC_DIR', APP_PATH . '/public');
 
 date_default_timezone_set('America/Bogota');
 
-// Base de datos
-require_once APP_PATH . '/app/libraries/Database.php';
-
 // Configuraciones de entorno de la aplicacion
 require_once 'env.php';
 

@@ -104,4 +104,13 @@ class TareaModel
         $db->disconnect();
         return $result;
     }
+
+    public function eliminarTarea($idTarea)
+    {
+        $db = new Database();
+        $sql = "DELETE FROM tarea WHERE idTarea = ?";
+        $result = $db->deleteRow($sql, [$idTarea]);
+        $db->disconnect();
+        return $result;
+    }
 }

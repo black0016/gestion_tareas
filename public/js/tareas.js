@@ -448,7 +448,6 @@ const validarFormularioEditarTarea = () => {
         });
 };
 
-
 const confirmarTareaEditada = (response) => {
     if (response.status === 'success') {
         mostrarAlerta('fa fa-check', 'Éxito', 'Tarea editada correctamente.', 'green', {
@@ -462,4 +461,38 @@ const confirmarTareaEditada = (response) => {
             Cerrar: function () { }
         });
     }
+};
+
+const eliminarTarea = (idTarea) => {
+    $.confirm({
+        title: 'Confirmar',
+        content: '¿Estás seguro de que deseas eliminar esta tarea? Esta acción no se puede deshacer.',
+        type: 'red',
+        buttons: {
+            confirm: {
+                text: 'Sí, eliminar',
+                btnClass: 'btn-red',
+                action: function () {
+                    ajax('eliminarTarea', 'POST', { idTarea }, 'json', function (response) {
+                        if (response.status === 'success') {
+                            mostrarAlerta('fa fa-check', 'Éxito', 'Tarea eliminada correctamente.', 'green', {
+                                Cerrar: function () {
+                                    dt_tareas.ajax.reload();
+                                }
+                            });
+                        } else {
+                            mostrarAlerta('fa fa-times', 'Error', response.message, 'red', {
+                                Cerrar: function () { }
+                            });
+                        }
+                    });
+                }
+            },
+            cancel: {
+                text: 'Cancelar',
+                btnClass: 'btn-default',
+                action: function () { }
+            }
+        }
+    });
 };

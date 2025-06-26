@@ -157,4 +157,21 @@ class TareaController
             echo json_encode(['status' => 'error', 'message' => 'Error al editar la tarea.']);
         }
     }
+
+    public function eliminarTarea()
+    {
+        $idTarea = filter_input(INPUT_POST, 'idTarea', FILTER_VALIDATE_INT);
+        if (!$idTarea) {
+            echo json_encode(['status' => 'error', 'message' => 'ID de tarea inválido.']);
+            return;
+        }
+
+        $tareaModel = new TareaModel();
+        $result = $tareaModel->eliminarTarea($idTarea);
+        if ($result) {
+            echo json_encode(['status' => 'success', 'message' => 'Tarea eliminada exitosamente.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Error al eliminar la tarea.']);
+        }
+    }
 }

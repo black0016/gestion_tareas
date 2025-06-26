@@ -1,14 +1,14 @@
 <?php
 
 define('SIROS_MAIL', [
-    'Host' => 'ns383900.host-tugatech.com',
+    'Host' => '',
     'SMTPAuth' => true,
-    'Username' => 'securibot@securicol.com',
-    'Password' => 'Xw7bs84@5',
+    'Username' => '',
+    'Password' => '',
     'SMTPSecure' => 'ssl',
     'Port' => 465,
-    'AddressFrom' => 'securibot@securicol.com',
-    'NameFrom' => 'SIROS SYSTEM',
+    'AddressFrom' => '',
+    'NameFrom' => '',
     'CharSet' => 'UTF-8',
 ]);
 
