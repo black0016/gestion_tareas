@@ -11,4 +11,6 @@ define('ROUTES', [
     'crearTarea'                                                     => ['controller' => 'Tarea', 'action' => 'crearTarea', 'perfil' => [2]],
     'listarTareas'                                                   => ['controller' => 'Tarea', 'action' => 'listarTareas', 'perfil' => [2]],
     'terminarTarea'                                                  => ['controller' => 'Tarea', 'action' => 'terminarTarea', 'perfil' => [2]],
+    'consultarTarea'                                                 => ['controller' => 'Tarea', 'action' => 'consultarTarea', 'perfil' => [2]],
+    'editarTarea'                                                    => ['controller' => 'Tarea', 'action' => 'editarTarea', 'perfil' => [2]],
 ]);

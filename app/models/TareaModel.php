@@ -63,4 +63,45 @@ class TareaModel
         $db->disconnect();
         return $result;
     }
+
+    public function consultarTarea($idTarea)
+    {
+        $db = new Database();
+        $sql = "SELECT t.idTarea, 
+                    t.tituloTarea, 
+                    t.descripcionTarea, 
+                    t.fechaVencimientoTarea, 
+                    t.prioridadTarea, 
+                    t.tareaCompleta, 
+                    t.created_at, 
+                    t.updated_at
+                FROM tarea t
+                WHERE t.idTarea = ?";
+        $db->setFetchWithAssoc();
+        $result = $db->getRow($sql, [$idTarea]);
+        $db->disconnect();
+        return $result;
+    }
+
+    public function editarTarea(array $data)
+    {
+        $db = new Database();
+        $sql = "UPDATE tarea 
+                SET tituloTarea = ?, 
+                    descripcionTarea = ?, 
+                    fechaVencimientoTarea = ?, 
+                    prioridadTarea = ?, 
+                    updated_at = ?
+                WHERE idTarea = ?";
+        $result = $db->updateRow($sql, [
+            $data['tarea'],
+            $data['descripcion'],
+            $data['fechaVencimiento'],
+            $data['prioridad'],
+            date('Y-m-d H:i:s'),
+            $data['idTarea']
+        ]);
+        $db->disconnect();
+        return $result;
+    }
 }

@@ -307,3 +307,159 @@ const terminarTarea = (idTarea) => {
         }
     });
 };
+
+const editarTarea = (idTarea) => {
+    ajax('consultarTarea', 'POST', { idTarea: idTarea }, 'json', formularioEditarTarea);
+};
+
+let modalEditarTarea = null;
+const formularioEditarTarea = (response) => {
+    if (response.status === 'success') {
+        const tarea = response.data;
+        modalEditarTarea = $.confirm({
+            title: "Editar Tarea",
+            type: 'blue',
+            onContentReady: function () {
+                validarFormularioEditarTarea();
+            },
+            columnClass: 'medium',
+            content: `
+                <form id="frmEditarTarea">
+                    <input type="hidden" name="idTarea" value="${tarea.idTarea}">
+                    <div class="form-group col-xs-12">
+                        <label for="tareaTitulo">Título de la Tarea</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-tasks"></i> </span>
+                            <input type="text" name="tareaTitulo" id="tareaTitulo" value="${tarea.tituloTarea}" autocomplete="off" class="form-control" placeholder="Ejemplo: Reunión con el cliente">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <label for="tareaDescripcion">Descripción de la Tarea</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-info-circle"></i> </span>
+                            <textarea name="tareaDescripcion" id="tareaDescripcion" class="form-control" rows="5" placeholder="Descripción detallada de la tarea">${tarea.descripcionTarea}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <label for="tareaFechaVencimiento">Fecha de Vencimiento</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                            <input type="date" name="tareaFechaVencimiento" id="tareaFechaVencimiento" value="${tarea.fechaVencimientoTarea}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <label for="tareaPrioridad">Prioridad de la Tarea</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-exclamation-triangle"></i> </span>
+                            <select name="tareaPrioridad" id="tareaPrioridad" class="form-control">
+                                <option value="" disabled>Seleccione una prioridad</option>
+                                <option value="baja" ${tarea.prioridadTarea === 'baja' ? 'selected' : ''}>Baja</option>
+                                <option value="media" ${tarea.prioridadTarea === 'media' ? 'selected' : ''}>Media</option>
+                                <option value="alta" ${tarea.prioridadTarea === 'alta' ? 'selected' : ''}>Alta</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            `,
+            buttons: {
+                formSubmit: {
+                    text: 'Guardar',
+                    btnClass: 'btn-blue',
+                    action: function () {
+                        $('#frmEditarTarea').submit();
+                        return false;
+                    }
+                },
+                cancel: {
+                    text: 'Cerrar',
+                    btnClass: 'btn-red',
+                    action: function () { }
+                }
+            }
+        });
+    } else {
+        mostrarAlerta('fa fa-times', 'Error', response.message, 'red', {
+            Cerrar: function () { }
+        });
+    }
+};
+
+const validarFormularioEditarTarea = () => {
+    $('#frmEditarTarea')
+        .bootstrapValidator({
+            excluded: ':disabled',
+            message: 'Este Valor no es Valido',
+            feedbackIcons: {
+                valid: 'fa fa-check',
+                invalid: 'fa fa-times',
+                validating: 'fa fa-refresh'
+            },
+            fields: {
+                tareaTitulo: {
+                    validators: {
+                        notEmpty: {
+                            message: 'El título de la tarea es obligatorio'
+                        },
+                        stringLength: {
+                            min: 5,
+                            max: 100,
+                            message: 'El título debe tener entre 5 y 100 caracteres'
+                        }
+                    }
+                },
+                tareaDescripcion: {
+                    validators: {
+                        notEmpty: {
+                            message: 'La descripción de la tarea es obligatoria'
+                        },
+                        stringLength: {
+                            min: 10,
+                            max: 500,
+                            message: 'La descripción debe tener entre 10 y 500 caracteres'
+                        }
+                    }
+                },
+                tareaFechaVencimiento: {
+                    validators: {
+                        notEmpty: {
+                            message: 'La fecha de vencimiento es obligatoria'
+                        },
+                        date: {
+                            format: 'YYYY-MM-DD',
+                            message: 'La fecha de vencimiento no es válida'
+                        }
+                    }
+                },
+                tareaPrioridad: {
+                    validators: {
+                        notEmpty: {
+                            message: 'La prioridad de la tarea es obligatoria'
+                        }
+                    }
+                }
+            }
+        })
+        .on('success.form.bv', function (e) {
+            e.preventDefault();
+            const $form = $(e.target);
+            const bv = $form.data('bootstrapValidator');
+            ajax('editarTarea', 'POST', $form.serialize(), 'json', confirmarTareaEditada);
+            bv.disableSubmitButtons(false);
+        });
+};
+
+
+const confirmarTareaEditada = (response) => {
+    if (response.status === 'success') {
+        mostrarAlerta('fa fa-check', 'Éxito', 'Tarea editada correctamente.', 'green', {
+            Cerrar: function () {
+                dt_tareas.ajax.reload();
+                modalEditarTarea.close();
+            }
+        });
+    } else {
+        mostrarAlerta('fa fa-times', 'Error', response.message, 'red', {
+            Cerrar: function () { }
+        });
+    }
+};

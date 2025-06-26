@@ -15,7 +15,6 @@ class TareaController
         $prioridad = filter_input(INPUT_POST, 'tareaPrioridad', FILTER_SANITIZE_SPECIAL_CHARS);
 
         if (empty($tarea) || strlen($tarea) < 3 || strlen($tarea) > 100) {
-            var_dump($tarea);
             echo json_encode(['status' => 'error', 'message' => 'El nombre de la tarea es inválido.']);
             return;
         }
@@ -98,6 +97,64 @@ class TareaController
             echo json_encode(['status' => 'success', 'message' => 'Tarea marcada como completada.']);
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Error al marcar la tarea como completada.']);
+        }
+    }
+
+    public function consultarTarea()
+    {
+        $idTarea = filter_input(INPUT_POST, 'idTarea', FILTER_VALIDATE_INT);
+        if (!$idTarea) {
+            echo json_encode(['status' => 'error', 'message' => 'ID de tarea inválido.']);
+            return;
+        }
+
+        $tareaModel = new TareaModel();
+        $tarea = $tareaModel->consultarTarea($idTarea);
+        if ($tarea) {
+            echo json_encode(['status' => 'success', 'data' => $tarea]);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Tarea no encontrada.']);
+        }
+    }
+
+    public function editarTarea()
+    {
+        $idTarea = filter_input(INPUT_POST, 'idTarea', FILTER_VALIDATE_INT);
+        $tarea = filter_input(INPUT_POST, 'tareaTitulo', FILTER_SANITIZE_SPECIAL_CHARS);
+        $descripcion = filter_input(INPUT_POST, 'tareaDescripcion', FILTER_SANITIZE_SPECIAL_CHARS);
+        $fechaVencimiento = filter_input(INPUT_POST, 'tareaFechaVencimiento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $prioridad = filter_input(INPUT_POST, 'tareaPrioridad', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        if (!$idTarea || empty($tarea) || strlen($tarea) < 3 || strlen($tarea) > 100) {
+            echo json_encode(['status' => 'error', 'message' => 'Datos inválidos.']);
+            return;
+        }
+        if (empty($descripcion) || strlen($descripcion) < 5 || strlen($descripcion) > 500) {
+            echo json_encode(['status' => 'error', 'message' => 'La descripción de la tarea es inválida.']);
+            return;
+        }
+        if (empty($fechaVencimiento) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaVencimiento)) {
+            echo json_encode(['status' => 'error', 'message' => 'La fecha de vencimiento es inválida.']);
+            return;
+        }
+        if (empty($prioridad) || !in_array($prioridad, ['baja', 'media', 'alta'])) {
+            echo json_encode(['status' => 'error', 'message' => 'La prioridad es inválida.']);
+            return;
+        }
+
+        $data = [
+            'idTarea' => $idTarea,
+            'tarea' => $tarea,
+            'descripcion' => $descripcion,
+            'fechaVencimiento' => $fechaVencimiento,
+            'prioridad' => $prioridad
+        ];
+        $tareaModel = new TareaModel();
+        $result = $tareaModel->editarTarea($data);
+        if ($result) {
+            echo json_encode(['status' => 'success', 'message' => 'Tarea editada exitosamente.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Error al editar la tarea.']);
         }
     }
 }
